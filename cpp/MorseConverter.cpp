@@ -1,13 +1,38 @@
 class MorseConverter
 {
-  char message;
+  /*   char Caracteres[taille]; */
+  String message;
   uint8_t serial;
 
 public:
-  MorseConverter() : message(), serial(){};
+  MorseConverter() : message(""), serial(){
 
-  void afficherMorse(){};
-  void conversionToASCII(){};
+                                  };
+
+  String get_message()
+  {
+    return message;
+  }
+
+  void afficherMorse()
+  {
+    Serial.println(conversionToASCII(message));
+  };
+  String conversionToASCII(String message)
+  {
+    String result = "";
+    String car = "";
+    for (uint8_t i; i < message.length(); i++)
+    {
+      if (message[i] != ' ')
+      {
+        car += message[i];
+      }
+      else
+      {
+            }
+    }
+  };
   void lireChar(){};
 
   void fin_message(unsigned long dernier_appuye)
