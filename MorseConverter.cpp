@@ -5,4 +5,8 @@ class MorseConverter
 
 public:
   MorseConverter() : message(), serial(){};
+
+  void afficherMorse(){};
+  void conversionToASCII(){};
+  void lireChar(){};
 }
