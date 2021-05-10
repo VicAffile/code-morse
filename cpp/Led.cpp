@@ -18,6 +18,5 @@ public:
         }
         this->etat = bouton_etat;
         digitalWrite(pin, this->etat ? HIGH : LOW);
-        Serial.println(this->etat);
     }
 };
