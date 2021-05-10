@@ -1,8 +1,10 @@
-const char lettres[26] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
+uint8_t PIN_INVALIDE = 255;
 
 #include "./cpp/Bouton.cpp"
 #include "./cpp/Led.cpp"
 #include "./cpp/MorseConverter.cpp"
+
+const char lettres[26] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
 
 Bouton bouton;
 Led led;

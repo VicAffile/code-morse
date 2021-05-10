@@ -1,4 +1,3 @@
-const uint8_t PIN_INVALIDE = 255;
 class Bouton
 {
     bool etat;

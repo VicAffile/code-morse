@@ -9,4 +9,4 @@ public:
   void afficherMorse(){};
   void conversionToASCII(){};
   void lireChar(){};
-}
+};
