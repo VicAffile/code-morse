@@ -30,14 +30,14 @@ public:
       }
       else
       {
-            }
+      }
     }
   };
   void lireChar(){};
 
   void fin_message(unsigned long dernier_appuye)
   {
-    if (millis() - dernier_appuye > 2000 && this->message == "")
+    if (millis() - dernier_appuye > 2000 && this->message != "")
     {
       Serial.println("Message fini");
     }

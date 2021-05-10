@@ -23,4 +23,5 @@ void loop()
 {
   bouton.appuye();
   led.allumer_eteindre(bouton.get_etat());
+  message.fin_message(bouton.get_fin_appuye());
 }
