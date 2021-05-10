@@ -8,6 +8,7 @@ const char lettres[26] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K',
 
 Bouton bouton;
 Led led;
+MorseConverter message;
 
 void setup()
 {
@@ -20,5 +21,6 @@ void setup()
 
 void loop()
 {
-  led.allumer_eteindre(bouton.appuye());
+  bouton.appuye();
+  led.allumer_eteindre(bouton.get_etat());
 }

@@ -13,6 +13,16 @@ public:
         this->etat = digitalRead(pin);
     }
 
+    bool get_etat()
+    {
+        return this->etat;
+    }
+
+    unsigned long get_fin_appuye()
+    {
+        return this->fin_appuye;
+    }
+
     bool appuye()
     {
         bool etat = digitalRead(this->pin);
