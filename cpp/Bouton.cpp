@@ -37,11 +37,11 @@ public:
                 this->fin_appuye = millis();
                 if (this->fin_appuye - this->debut_appuye <= 500)
                 {
-                    Serial.println("Appuye court");
+                    Serial.println(".");
                 }
                 else
                 {
-                    Serial.println("Appuye long");
+                    Serial.println("-");
                 }
             }
         }
