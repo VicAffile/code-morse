@@ -4,11 +4,9 @@ uint8_t PIN_INVALIDE = 255;
 #include "./cpp/Led.cpp"
 #include "./cpp/MorseConverter.cpp"
 
-const char lettres[26] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
-
 Bouton bouton;
 Led led;
-MorseConverter message;
+MorseConverter converter;
 
 void setup()
 {
@@ -21,7 +19,7 @@ void setup()
 
 void loop()
 {
-  bouton.appuye();
+  converter.lecture_bouton(bouton.appuye());
+  //converter.couper_caractere(bouton.pause());
   led.allumer_eteindre(bouton.get_etat());
-  message.fin_message(bouton.get_fin_appuye());
 }

@@ -24,7 +24,7 @@ public:
         return this->fin_appuye;
     }
 
-    bool appuye()
+    char appuye()
     {
         bool etat = digitalRead(this->pin);
         if (this->etat == etat)
@@ -32,32 +32,46 @@ public:
             if (etat == 0)
             {
                 this->debut_appuye = millis();
+                Serial.println("debut appuye");
             }
             else
             {
                 this->fin_appuye = millis();
+                this->etat = !etat;
                 if (this->fin_appuye - this->debut_appuye <= 500)
                 {
                     Serial.println(".");
+                    return '.';
                 }
                 else
                 {
                     Serial.println("-");
+                    return '-';
                 }
             }
         }
         this->etat = !etat;
-        return this->etat;
+        return '0';
     }
-    void pause()
+    int pause()
     {
         if (this->fin_appuye != 0)
         {
-            if (millis() - this->fin_appuye < 5 * this->appuye_court)
+            int temps = millis() - this->fin_appuye;
+            if (temps >= 3 * this->appuye_court && temps < 6 * this->appuye_court)
             {
+                Serial.println("caractère suivant");
+                return 0;
             }
-            else
+            else if (temps >= 6 * this->appuye_court && temps < 9 * this->appuye_court)
             {
+                Serial.println("espace");
+                return 1;
+            }
+            else if (temps >= 9 * this->appuye_court)
+            {
+                Serial.println("fin du message ");
+                return 2;
             }
         }
     }

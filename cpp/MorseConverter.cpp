@@ -1,13 +1,14 @@
+const char lettres_ascii[26] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
+const String lettres_morse[26] = {".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--.."};
+
 class MorseConverter
 {
   /*   char Caracteres[taille]; */
   String message;
-  uint8_t serial;
+  String caractere;
 
 public:
-  MorseConverter() : message(""), serial(){
-
-                                  };
+  MorseConverter() : message(""), caractere(""){};
 
   String get_message()
   {
@@ -20,6 +21,8 @@ public:
   };
   String conversionToASCII(String message)
   {
+
+    //conversion du caractere
     String result = "";
     String car = "";
     for (uint8_t i; i < message.length(); i++)
@@ -35,11 +38,11 @@ public:
   };
   void lireChar(){};
 
-  void fin_message(unsigned long dernier_appuye)
+  void lecture_bouton(char type_appuye)
   {
-    if (millis() - dernier_appuye > 2000 && this->message != "")
+    if (type_appuye != '0')
     {
-      Serial.println("Message fini");
+      this->caractere += type_appuye;
     }
   }
 };
