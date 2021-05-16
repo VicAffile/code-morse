@@ -4,10 +4,11 @@ class Bouton
     uint8_t pin;
     unsigned long debut_appuye;
     unsigned long fin_appuye;
+    int appuye_court;
 
 public:
-    Bouton() : pin(PIN_INVALIDE), etat(false) {}
-    Bouton(uint8_t pin) : pin(pin)
+    Bouton() : pin(PIN_INVALIDE), etat(false), fin_appuye(0), appuye_court(500) {}
+    Bouton(uint8_t pin) : pin(pin), fin_appuye(0), appuye_court(500)
     {
         pinMode(pin, INPUT_PULLUP);
         this->etat = digitalRead(pin);
@@ -47,5 +48,17 @@ public:
         }
         this->etat = !etat;
         return this->etat;
+    }
+    void pause()
+    {
+        if (this->fin_appuye != 0)
+        {
+            if (millis() - this->fin_appuye < 5 * this->appuye_court)
+            {
+            }
+            else
+            {
+            }
+        }
     }
 };
