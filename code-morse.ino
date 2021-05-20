@@ -11,15 +11,19 @@ MorseConverter converter;
 void setup()
 {
   Serial.begin(9600);
-  Serial.println("Port série ouvert ----------");
-  Serial.println("----------");
+  Serial.println("----Bienvenu sur le traducteur Morse ------");
+  Serial.println("----Quel action voulez-vous réalise ?------");
+  Serial.println("----1.morse button to asci on monitor------");
+  Serial.println("----2. asci on monitor to morse with led------");
   bouton = Bouton(12);
   led = Led(13);
 }
 
 void loop()
 {
-  converter.lecture_bouton(bouton.appuye());
+
+  converter.menu();
+  //converter.lecture_bouton(bouton.appuye());
   //converter.couper_caractere(bouton.pause());
-  led.allumer_eteindre(bouton.get_etat());
+  //led.allumer_eteindre(bouton.get_etat());
 }
