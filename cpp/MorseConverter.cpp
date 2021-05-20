@@ -14,47 +14,49 @@ public:
   String get_message()
   {
     return message;
-  }
-  void menu()
-  {
-    String choice = "";
-    if (step == 0)
-    { //etape 0 choix du sens de la translation
-      choice = Serial.readString();
-      if (choice == "1")
-      {
-        Serial.println(" morse to asci on monitor");
-        step++;
-      }
-      else if (choice == "2")
-      {
-        Serial.println("You choose  asci on monitor to morse ");
-        step++;
-      }
-    }
-    //etape 1pour la translation morse to ascii
-    if (step == 1 && choice == "1")
+    void menu()
     {
-      choice = "t";
-      Serial.println("Press the button for translate message in morse");
-
-      Serial.println("Your sentense in morse :" + choice);
-
-      /* Serial.println("Your sentense in ascii :"+choice);*/
-    }
-    if (step == 1 && choice == "2")
-    { //etape 1 pour la translation ascii to morse
-      choice = "";
-      Serial.println("write your message");
-      choice = Serial.readString();
-
-      if (choice != "")
+      String choice = "";
+      if (step == 0)
+      { //etape 0 choix du sens de la translation
+        choice = Serial.readString();
+        if (choice == "1")
+        {
+          Serial.println(" morse to asci on monitor");
+          step++;
+        }
+        else if (choice == "2")
+        {
+          Serial.println("You choose  asci on monitor to morse ");
+          step++;
+        }
+      }
+      //etape 1pour la translation morse to ascii
+      if (step == 1 && choice == "1")
       {
-        Serial.println("Your sentense is :" + choice);
+        choice = "t";
+        Serial.println("Press the button for translate message in morse");
+
+        Serial.println("Your sentense in morse :" + choice);
+
+        /* Serial.println("Your sentense in ascii :"+choice);*/
+      }
+      if (step == 1 && choice == "2")
+      { //etape 1 pour la translation ascii to morse
+        Serial.println("write your message");
+        while (Serial.available() > 0)
+        {
+          message += char(Serial.read());
+        }
+        if (message.length() > 0)
+        {
+          Serial.println(message);
+        }
       }
     }
-  }
-
+    void truncate() {}
+    String convertToMorse() {}
+  };
   void afficherMorse()
   {
     Serial.println(conversionToASCII(message));
