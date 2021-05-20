@@ -1,84 +1,82 @@
-const char lettres_ascii[26] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
+
 const String lettres_morse[26] = {".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--.."};
 
 class MorseConverter
 {
   /*   char Caracteres[taille]; */
+  String morse;
   String message;
-  String caractere;
+  char c;
   uint8_t step;
 
 public:
-  MorseConverter() : message(""), caractere(""), step(0){};
+  MorseConverter() : message(""), morse(""), c(""), step(0){};
 
   String get_message()
   {
     return message;
-    void menu()
-    {
-      String choice = "";
-      if (step == 0)
-      { //etape 0 choix du sens de la translation
-        choice = Serial.readString();
-        if (choice == "1")
-        {
-          Serial.println(" morse to asci on monitor");
-          step++;
-        }
-        else if (choice == "2")
-        {
-          Serial.println("You choose  asci on monitor to morse ");
-          step++;
-        }
-      }
-      //etape 1pour la translation morse to ascii
-      if (step == 1 && choice == "1")
+  }
+  int get_step()
+  {
+    return this->step;
+  }
+  void menu()
+  {
+    String choice = "";
+    if (step == 0)
+    { //etape 0 choix du sens de la translation
+      choice = Serial.readString();
+      if (choice == "1")
       {
-        choice = "t";
-        Serial.println("Press the button for translate message in morse");
-
-        Serial.println("Your sentense in morse :" + choice);
-
-        /* Serial.println("Your sentense in ascii :"+choice);*/
+        Serial.println(" morse to asci on monitor");
+        step++;
       }
-      if (step == 1 && choice == "2")
-      { //etape 1 pour la translation ascii to morse
-        Serial.println("write your message");
-        while (Serial.available() > 0)
-        {
-          message += char(Serial.read());
-        }
-        if (message.length() > 0)
-        {
-          Serial.println(message);
-        }
+      else if (choice == "2")
+      {
+        Serial.println("You choose  asci on monitor to morse ");
+        step++;
       }
     }
-    void truncate() {}
-    String convertToMorse() {}
-  };
-  void afficherMorse()
-  {
-    Serial.println(conversionToASCII(message));
-  };
-  String conversionToASCII(String message)
-  {
-
-    //conversion du caractere
-    String result = "";
-    String car = "";
-    for (uint8_t i; i < message.length(); i++)
+    //etape 1pour la translation morse to ascii
+    if (step == 1 && choice == "1")
     {
-      if (message[i] != ' ')
+      choice = "t";
+      Serial.println("Press the button for translate message in morse");
+
+      Serial.println("Your sentense in morse :" + choice);
+
+      /* Serial.println("Your sentense in ascii :"+choice);*/
+    }
+    if (step == 1 && choice == "2")
+    { //etape 1 pour la translation ascii to morse
+      Serial.println("write your message");
+      if (Serial.available() > 0)
       {
-        car += message[i];
+        c = Serial.read();
+        message += c;
+
+        morse += CarAsciiToMorse(Serial.read());
       }
-      else
+      if (!message.equals(""))
       {
+        Serial.println(message);
       }
     }
-  };
-  void lireChar(){};
+  }
+  String CarAsciiToMorse(int c)
+  { // methode qui tradui un caracter Asci en Morse
+    return lettres_morse[c % 65];
+  }
+  char CarMorseToAscii(String car)
+  { // methode qui tradui un caracter Morse en Asci
+    for (uint8_t i; i < 26; i++)
+    {
+      if (c == lettres_morse[i])
+      {
+        return i + 65;
+      }
+    }
+  }
 
   void lecture_bouton(char type_appuye)
   {
