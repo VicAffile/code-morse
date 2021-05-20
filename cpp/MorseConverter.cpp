@@ -19,7 +19,7 @@ public:
   {
     String choice = "";
     if (step == 0)
-    {
+    { //etape 0 choix du sens de la translation
       choice = Serial.readString();
       if (choice == "1")
       {
@@ -32,19 +32,29 @@ public:
         step++;
       }
     }
-    else if (step == 1)
+    //etape 1pour la translation morse to ascii
+    if (step == 1 && choice == "1")
     {
+      choice = "t";
+      Serial.println("Press the button for translate message in morse");
+
+      Serial.println("Your sentense in morse :" + choice);
+
+      /* Serial.println("Your sentense in ascii :"+choice);*/
+    }
+    if (step == 1 && choice == "2")
+    { //etape 1 pour la translation ascii to morse
       choice = "";
       Serial.println("write your message");
       choice = Serial.readString();
+
       if (choice != "")
       {
         Serial.println("Your sentense is :" + choice);
       }
-
-      step++;
     }
   }
+
   void afficherMorse()
   {
     Serial.println(conversionToASCII(message));
