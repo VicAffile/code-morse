@@ -12,7 +12,7 @@ void setup()
 {
   Serial.begin(9600);
   Serial.println("Port série ouvert ----------");
-
+  Serial.println("----------");
   bouton = Bouton(12);
   led = Led(13);
 }
