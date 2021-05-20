@@ -6,15 +6,45 @@ class MorseConverter
   /*   char Caracteres[taille]; */
   String message;
   String caractere;
+  uint8_t step;
 
 public:
-  MorseConverter() : message(""), caractere(""){};
+  MorseConverter() : message(""), caractere(""), step(0){};
 
   String get_message()
   {
     return message;
   }
+  void menu()
+  {
+    String choice = "";
+    if (step == 0)
+    {
+      choice = Serial.readString();
+      if (choice == "1")
+      {
+        Serial.println(" morse to asci on monitor");
+        step++;
+      }
+      else if (choice == "2")
+      {
+        Serial.println("You choose  asci on monitor to morse ");
+        step++;
+      }
+    }
+    else if (step == 1)
+    {
+      choice = "";
+      Serial.println("write your message");
+      choice = Serial.readString();
+      if (choice != "")
+      {
+        Serial.println("Your sentense is :" + choice);
+      }
 
+      step++;
+    }
+  }
   void afficherMorse()
   {
     Serial.println(conversionToASCII(message));
